@@ -19,4 +19,7 @@ public class BotConfig {
 
     @Value("${telegram.bot.menu}")
     private String menu_id;
+
+    @Value("${telegram.bot.group}")
+    private String group_id;
 }

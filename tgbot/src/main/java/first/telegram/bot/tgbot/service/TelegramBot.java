@@ -190,12 +190,10 @@ public class TelegramBot extends TelegramLongPollingBot {
                         String type = text.equalsIgnoreCase("Pizza") ? "Pizza" : "Pasta";
                         conversationStates.put(chatId, ConversationState.ASK_NAME);
 
-
                         optionalUser.ifPresent(currentUser -> {
                             currentUser.setType(type);
                             user.save(currentUser);
                         });
-
 
                         SendMessage response = new SendMessage();
                         response.setChatId(chatId);
@@ -215,7 +213,6 @@ public class TelegramBot extends TelegramLongPollingBot {
                         user.save(currentUser);
                     });
 
-
                     conversationStates.put(chatId, ConversationState.ASK_ADDRESS);
                     SendMessage response = new SendMessage();
                     response.setChatId(chatId);
@@ -230,6 +227,8 @@ public class TelegramBot extends TelegramLongPollingBot {
                     });
 
 
+                    sendOrderToGroup(chatId, optionalUser);
+
                     conversationStates.remove(chatId);
                     SendMessage endMessage = new SendMessage();
                     endMessage.setChatId(chatId);
@@ -239,6 +238,22 @@ public class TelegramBot extends TelegramLongPollingBot {
             }
         }
     }
+
+    private void sendOrderToGroup(long chatId, Optional<User> optionalUser) {
+        optionalUser.ifPresent(currentUser -> {
+            String orderDetails = "New order received!\n" +
+                    "Type: " + currentUser.getType() + "\n" +
+                    "Name: " + currentUser.getName() + "\n" +
+                    "Address: " + currentUser.getLocation();
+
+            SendMessage groupMessage = new SendMessage();
+            groupMessage.setChatId(config.getGroup_id());
+            groupMessage.setText(orderDetails);
+
+            executeMessage(groupMessage);
+        });
+    }
+
 
 
     private void executeMessage(SendMessage message) {
