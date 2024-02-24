@@ -1,12 +1,12 @@
 # Telegram Bot Template with Spring and MySQL
 This is a template project for building a Telegram bot using Java with the TelegramBots library, Spring framework, and MySQL database. The project is designed to provide a foundation for creating a simple Telegram bot with features like responding to button presses, sending collected data to a group chat, and storing user answers in a MySQL database.
 
-**Features**
+## Features
  - Button Responses: The bot can respond to button presses by users.
  - Group Chat Messaging: It can send collected data to a group chat.
  - Database Interaction: Memorizes user answers and stores them in a MySQL database.
 
-**Getting Started**
+## Getting Started
  To get started with this template, follow these steps:
 
 1.**Clone the Repository**: Clone this repository to your local machine using git clone https://github.com/poolboyinc/TelegramBotTemplate
